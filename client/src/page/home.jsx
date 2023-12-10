@@ -2,27 +2,31 @@ import React, { useState } from "react";
 import { ImCross } from "react-icons/im";
 import { BsRecordCircleFill } from "react-icons/bs";
 
-const home = () => {
+const Home = () => {
   const [isChecked, setIsChecked] = useState(0);
 
   const toggleSwitch = () => {
     setIsChecked(!isChecked);
   };
+
   return (
-    <div className="h-screen max-w-[400px] m-auto flex justify-center items-center flex-col">
+    <div className="h-screen max-w-[400px] m-auto flex justify-center items-center flex-col px-5 py-5">
       <div className="flex justify-center items-center gap-3">
         <ImCross size={30} fill="#12bfe9" />
         <BsRecordCircleFill size={33} fill="#ee9806" />
       </div>
 
-      <div className="bg-[#334f74] w-full h-fit rounded-xl p-3 mt-3">
+      <div className="bg-[#334f74] w-full h-fit rounded-xl p-3 mt-7 boxshadow group">
         <h2 className="text-center font-bold text-gray-200">
           PICK PLAYER 1'S MARK
         </h2>
-        <div className="w-full p-2 bg-[#2d4255] rounded-md">
-          <div className="w-full flex justify-center items-center gap-2">
+        <div className="w-full p-2 bg-[#2d4255] rounded-md mt-5">
+          <div
+            onClick={toggleSwitch}
+            className="w-full flex justify-center items-center gap-2"
+          >
             <div
-              className={`p-3 flex-1 flex justify-center items-center rounded-md ${
+              className={`p-3 flex-1 flex justify-center items-center rounded-md group-hover:shadow-none ${
                 !isChecked ? "bg-[#2d4255]" : "bg-[#a1bed4]"
               }`}
             >
@@ -32,17 +36,30 @@ const home = () => {
               />
             </div>
             <div
-              className={`p-3 flex-1 flex justify-center items-center rounded-md ${
+              onClick={toggleSwitch}
+              className={`p-3 flex-1 flex justify-center items-center rounded-md group-hover:shadow-none ${
                 !isChecked ? "bg-[#a1bed4]" : "bg-[#2d4255]"
               }`}
             >
-              <BsRecordCircleFill size={30} fill="#a1bed4" />
+              <BsRecordCircleFill
+                size={30}
+                fill={`${!isChecked ? "#2d4255" : "#a1bed4"}`}
+              />
             </div>
           </div>
         </div>
+        <p className="text-center text-gray-300 mt-3 font-semibold text-[14px]">
+          REMEMBER X GOES ONCE
+        </p>
       </div>
+      <button className="bg-[#ee990a] w-full h-fit rounded-xl p-3 mt-7 text-black buttonshadowyellow">
+        NEW GAME (VS CPU)
+      </button>
+      <button className="bg-[#12bfe9] w-full h-fit rounded-xl p-3 mt-7 text-black buttonshadowblue">
+        NEW GAME (VS PLAYER)
+      </button>
     </div>
   );
 };
 
-export default home;
+export default Home;
