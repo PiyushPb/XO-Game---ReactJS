@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { ImCross } from "react-icons/im";
 import { BsRecordCircleFill } from "react-icons/bs";
 
-const Home = () => {
-  const [isChecked, setIsChecked] = useState(0);
+const Home = (props) => {
+  const [isChecked, setIsChecked] = useState(true);
 
   const toggleSwitch = () => {
     setIsChecked(!isChecked);
+    props.setVsCpuFirstTurn(isChecked);
   };
 
   return (
