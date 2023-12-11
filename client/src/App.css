@@ -10,10 +10,25 @@
 
 body {
   background-color: #26333c;
+  background-image: url("https://i.imgur.com/UWmo2VF.png");
+
+  background-repeat: repeat;
+  background-position: center;
 }
 
 .boxshadow {
   box-shadow: 0px 8px #1a2531;
+}
+
+.greyboxshadow {
+  box-shadow: 0px 8px rgb(148, 148, 148);
+  transition: 0.3s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.greyboxshadow:hover {
+  box-shadow: none;
+  transform: translateY(4px);
 }
 
 .buttonshadowblue {
