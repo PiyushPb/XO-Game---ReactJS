@@ -61,7 +61,9 @@ const Home = (props) => {
         NEW GAME (VS CPU)
       </Link>
       <Link
-        to="/"
+        onClick={() => {
+          alert("Under development will be available soon!");
+        }}
         className="bg-[#12bfe9] w-full h-fit rounded-xl p-3 mt-7 text-black buttonshadowblue text-center"
       >
         NEW GAME (VS PLAYER)
