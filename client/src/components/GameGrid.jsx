@@ -65,11 +65,6 @@ const GameGrid = () => {
     newBoard[cpuMove] = "O";
     setBoard(newBoard);
     setCurrentPlayer("X");
-
-    if (gameLogic(board) || Array.length === 8) {
-      alert("Game over!");
-      return;
-    }
   };
 
   const gameLogic = (squares) => {
@@ -100,6 +95,9 @@ const GameGrid = () => {
   };
 
   useEffect(() => {
+    if (gameLogic(board) || Array.length === 8) {
+      return;
+    }
     if (currentPlayer === "O") {
       cpuTurn();
     }

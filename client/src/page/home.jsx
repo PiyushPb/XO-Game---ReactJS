@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { ImCross } from "react-icons/im";
 import { BsRecordCircleFill } from "react-icons/bs";
 
@@ -52,12 +53,18 @@ const Home = () => {
           REMEMBER X GOES ONCE
         </p>
       </div>
-      <button className="bg-[#ee990a] w-full h-fit rounded-xl p-3 mt-7 text-black buttonshadowyellow">
+      <Link
+        to="/vscpu"
+        className="bg-[#ee990a] w-full h-fit rounded-xl p-3 mt-7 text-black buttonshadowyellow text-center"
+      >
         NEW GAME (VS CPU)
-      </button>
-      <button className="bg-[#12bfe9] w-full h-fit rounded-xl p-3 mt-7 text-black buttonshadowblue">
+      </Link>
+      <Link
+        to="/"
+        className="bg-[#12bfe9] w-full h-fit rounded-xl p-3 mt-7 text-black buttonshadowblue text-center"
+      >
         NEW GAME (VS PLAYER)
-      </button>
+      </Link>
     </div>
   );
 };

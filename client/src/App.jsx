@@ -10,7 +10,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/game/:id" element={<Game />} />
+        <Route path="/vscpu" element={<Game />} />
       </Routes>
     </Router>
   );
