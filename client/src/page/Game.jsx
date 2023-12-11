@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import GameHeader from "../components/GameHeader";
-import GameGrid from "../components/GameGrid";
-import ScoreBoard from "../components/ScoreBoard";
+import GameHeader from "../components/cpu/GameHeader";
+import GameGrid from "../components/cpu/GameGrid";
+import ScoreBoard from "../components/cpu/ScoreBoard";
 
 const Game = (props) => {
   const [isCpuFirst, setIsCpuFirst] = useState(props.vsCpuFirstTurn);
