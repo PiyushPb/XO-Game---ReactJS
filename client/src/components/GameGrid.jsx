@@ -2,12 +2,8 @@ import React, { useState, useEffect } from "react";
 import { ImCross } from "react-icons/im";
 import { BsRecordCircleFill } from "react-icons/bs";
 
-const GameGrid = () => {
+const GameGrid = (props) => {
   const [board, setBoard] = useState(Array(9).fill(null));
-  const [isCpuFirst, setIsCpuFirst] = useState(false);
-  const [currentPlayer, setCurrentPlayer] = useState(
-    isCpuFirst ? "cpu" : "player"
-  );
   const [winningStrike, setWinningStike] = useState(8);
 
   const strike = {
@@ -42,15 +38,15 @@ const GameGrid = () => {
       return;
     }
 
-    if (board[index] || currentPlayer === "O") {
+    if (board[index] || props.currentPlayer === "O") {
       return;
     }
 
     const newBoard = board.slice();
-    newBoard[index] = isCpuFirst ? "O" : "X";
+    newBoard[index] = props.isCpuFirst ? "O" : "X";
 
     setBoard(newBoard);
-    setCurrentPlayer(currentPlayer === "player" ? "cpu" : "player");
+    props.setCurrentPlayer(props.currentPlayer === "player" ? "cpu" : "player");
   };
 
   const cpuTurn = () => {
@@ -65,9 +61,9 @@ const GameGrid = () => {
     } while (board[cpuMove] !== null);
 
     const newBoard = board.slice();
-    newBoard[cpuMove] = isCpuFirst ? "X" : "O";
+    newBoard[cpuMove] = props.isCpuFirst ? "X" : "O";
     setBoard(newBoard);
-    setCurrentPlayer(currentPlayer === "player" ? "cpu" : "player");
+    props.setCurrentPlayer(props.currentPlayer === "player" ? "cpu" : "player");
   };
 
   const gameLogic = (squares) => {
@@ -101,14 +97,16 @@ const GameGrid = () => {
     // console.log("Current player turn : ", currentPlayer); // Debuging
     if (gameLogic(board) || Array.length === 8) {
       console.log(
-        (currentPlayer === "player" ? "CPU" : "Player") + " won the game"
+        (props.currentPlayer === "player" ? "CPU" : "Player") + " won the game"
       );
       return;
     }
-    if (currentPlayer === "cpu") {
-      cpuTurn();
+    if (props.currentPlayer === "cpu") {
+      setTimeout(() => {
+        cpuTurn();
+      }, 500);
     }
-  }, [currentPlayer]);
+  }, [props.currentPlayer]);
 
   const renderSquare = (index) => {
     return (
