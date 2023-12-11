@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GameHeader from "../components/GameHeader";
 import GameGrid from "../components/GameGrid";
 import ScoreBoard from "../components/ScoreBoard";
@@ -10,6 +10,10 @@ const Game = (props) => {
   );
   const [winningStrike, setWinningStike] = useState(8);
   const [board, setBoard] = useState(Array(9).fill(null));
+
+  const [cpuScore, setCpuScore] = useState(0);
+  const [playerScore, setPlayerScore] = useState(0);
+  const [tieScore, setTieScore] = useState(0);
 
   const gameLogic = (squares) => {
     const winningCombinations = [
@@ -32,11 +36,21 @@ const Game = (props) => {
         squares[a] === squares[c]
       ) {
         setWinningStike(i);
+        const winner = squares[a] === "X" ? "cpu" : "player";
+
+        if (winner === "player") {
+          setCpuScore(cpuScore + 1);
+        } else if (winner === "cpu") {
+          setPlayerScore(playerScore + 1);
+        } else {
+          setTieScore(tieScore + 1);
+        }
         return squares[a];
       }
     }
     return null;
   };
+
   return (
     <section className="h-screen w-fit m-auto flex justify-center items-center flex-col px-5 py-5">
       <GameHeader
@@ -53,8 +67,12 @@ const Game = (props) => {
         currentPlayer={currentPlayer}
         setCurrentPlayer={setCurrentPlayer}
       />
-      <ScoreBoard />
-      <p>Your opponent is thinking...</p>
+      <ScoreBoard
+        cpuScore={cpuScore}
+        playerScore={playerScore}
+        tieScore={tieScore}
+      />
+      {/* <p>Your opponent is thinking...</p> */}
     </section>
   );
 };
