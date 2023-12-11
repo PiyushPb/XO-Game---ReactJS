@@ -4,7 +4,10 @@ import { BsRecordCircleFill } from "react-icons/bs";
 
 const GameGrid = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
-  const [currentPlayer, setCurrentPlayer] = useState("X");
+  const [isCpuFirst, setIsCpuFirst] = useState(false);
+  const [currentPlayer, setCurrentPlayer] = useState(
+    isCpuFirst ? "cpu" : "player"
+  );
   const [winningStrike, setWinningStike] = useState(8);
 
   const strike = {
@@ -44,10 +47,10 @@ const GameGrid = () => {
     }
 
     const newBoard = board.slice();
-    newBoard[index] = "X";
+    newBoard[index] = isCpuFirst ? "O" : "X";
 
     setBoard(newBoard);
-    setCurrentPlayer("O");
+    setCurrentPlayer(currentPlayer === "player" ? "cpu" : "player");
   };
 
   const cpuTurn = () => {
@@ -62,9 +65,9 @@ const GameGrid = () => {
     } while (board[cpuMove] !== null);
 
     const newBoard = board.slice();
-    newBoard[cpuMove] = "O";
+    newBoard[cpuMove] = isCpuFirst ? "X" : "O";
     setBoard(newBoard);
-    setCurrentPlayer("X");
+    setCurrentPlayer(currentPlayer === "player" ? "cpu" : "player");
   };
 
   const gameLogic = (squares) => {
@@ -95,10 +98,14 @@ const GameGrid = () => {
   };
 
   useEffect(() => {
+    // console.log("Current player turn : ", currentPlayer); // Debuging
     if (gameLogic(board) || Array.length === 8) {
+      console.log(
+        (currentPlayer === "player" ? "CPU" : "Player") + " won the game"
+      );
       return;
     }
-    if (currentPlayer === "O") {
+    if (currentPlayer === "cpu") {
       cpuTurn();
     }
   }, [currentPlayer]);
