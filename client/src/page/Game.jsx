@@ -23,10 +23,17 @@ const Game = (props) => {
       [0, 3, 6], // Left column 3
       [1, 4, 7], // Middle column 4
       [2, 5, 8], // Right column 5
-      [0, 4, 8], // Diagonal from top-left to  bottom-right 6
+      [0, 4, 8], // Diagonal from top-left to bottom-right 6
       [2, 4, 6], // Diagonal from top-right to bottom-left 7
     ];
 
+    // Check for a tie
+    if (squares.every((square) => square !== null)) {
+      setTieScore(tieScore + 1);
+      return "Tie";
+    }
+
+    // Check for a winner
     for (let i = 0; i < winningCombinations.length; i++) {
       const [a, b, c] = winningCombinations[i];
 
@@ -39,16 +46,21 @@ const Game = (props) => {
         const winner = squares[a] === "X" ? "cpu" : "player";
 
         if (winner === "player") {
-          setCpuScore(cpuScore + 1);
+          setCpuScore(playerScore + 1);
         } else if (winner === "cpu") {
-          setPlayerScore(playerScore + 1);
-        } else {
-          setTieScore(tieScore + 1);
+          setPlayerScore(cpuScore + 1);
         }
-        return squares[a];
+        return winner;
       }
     }
+
     return null;
+  };
+
+  const resetBoard = () => {
+    setWinningStike(null);
+    setBoard(Array(9).fill(null));
+    setCurrentPlayer(isCpuFirst ? "cpu" : "player");
   };
 
   return (
@@ -57,6 +69,7 @@ const Game = (props) => {
         currentPlayer={currentPlayer}
         gameLogic={gameLogic}
         board={board}
+        resetBoard={resetBoard}
       />
       <GameGrid
         board={board}
