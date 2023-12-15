@@ -11,6 +11,11 @@ const Home = (props) => {
     props.setVsCpuFirstTurn(isChecked);
   };
 
+  const handleVsPlayerClick = (event) => {
+    // console.log(props.isUserLoggedin);
+    // props.setIsUserLoggedin(!props.isUserLoggedin);
+  };
+
   return (
     <div className="h-screen max-w-[400px] m-auto flex justify-center items-center flex-col px-5 py-5">
       <div className="flex justify-center items-center gap-3">
@@ -60,14 +65,12 @@ const Home = (props) => {
       >
         NEW GAME (VS CPU)
       </Link>
-      <Link
-        onClick={() => {
-          alert("Under development will be available soon!");
-        }}
+      <button
+        onClick={handleVsPlayerClick}
         className="bg-[#12bfe9] w-full h-fit rounded-xl p-3 mt-7 text-black buttonshadowblue text-center"
       >
         NEW GAME (VS PLAYER)
-      </Link>
+      </button>
     </div>
   );
 };

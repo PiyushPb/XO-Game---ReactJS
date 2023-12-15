@@ -6,26 +6,42 @@ import Home from "./page/home";
 import Game from "./page/Game";
 import Music from "./components/Music";
 import Signup from "./page/Signup";
+import Login from "./page/Login";
 
 function App() {
   const [vsCpuFirstTurn, setVsCpuFirstTurn] = useState(false);
 
+  const [isUserLoggedin, setIsUserLoggedin] = useState(false);
+
+  const [isDialogOpen, setDialogOpen] = useState(true);
+  const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
+
   return (
     <Router>
-      {/* Ensure that the Router component wraps the entire application */}
       <>
         <Routes>
           <Route
             path="/"
-            element={<Home setVsCpuFirstTurn={setVsCpuFirstTurn} />}
+            element={
+              <Home
+                setVsCpuFirstTurn={setVsCpuFirstTurn}
+                isUserLoggedin={isUserLoggedin}
+                setIsUserLoggedin={setIsUserLoggedin}
+                setDialogOpen={setDialogOpen}
+              />
+            }
           />
           <Route
             path="/vscpu"
             element={<Game vsCpuFirstTurn={vsCpuFirstTurn} />}
           />
-          <Route path="/signup" element={<Signup />} />
         </Routes>
         <Music />
+        <Signup isDialogOpen={isDialogOpen} setDialogOpen={setDialogOpen} />
+        <Login
+          isLoginDialogOpen={isLoginDialogOpen}
+          setIsLoginDialogOpen={setIsLoginDialogOpen}
+        />
       </>
     </Router>
   );
